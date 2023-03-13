@@ -6,7 +6,7 @@ The whole FEICP pipeline has three main parts: 1. Detecting circular RNAs from R
 If you use FEICP in your study, please cite:
 Yan Yang. Characterization of EIciRNAs reveals their distinct sequence features and potential regulatory function in regulation of gene expression. Manuscript in preparation.
 
-# Requirements
+# Preeequirements
 
 Pyhton3
 
@@ -23,5 +23,4 @@ bowtie
 hisat2
 
 bedtools
-
 pandas
