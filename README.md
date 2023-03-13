@@ -8,7 +8,7 @@ Yan Yang. Characterization of EIciRNAs reveals their distinct sequence features 
 
 # Requirements
 
-Pyhton3 \n
+Pyhton3
 BWA
 CIRI2
 seqtk
