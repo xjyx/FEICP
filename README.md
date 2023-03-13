@@ -6,21 +6,23 @@ The whole FEICP pipeline has three main parts: 1. Detecting circular RNAs from R
 If you use FEICP in your study, please cite:
 Yan Yang. Characterization of EIciRNAs reveals their distinct sequence features and potential regulatory function in regulation of gene expression. Manuscript in preparation.
 
-# Preeequirements
+# Prerequisites
 
-Pyhton3
+## Softwares and Packages
+Software
+  BWA
+  CIR2
+  STAR
+  Bowtie
+  Hisat2
+  Seqtk
+Packages
+  pandas
+  scipy
+ 
+## RNA-seq
+The RNase R-trated paired-end RNA-seq is recommended. Total RNA-seq, poly(A)-/ribo- RNA-seq is also acceptable. According to our experience, the RNase R treatment can significantly enrich EIciRNAs, like other circRNAs.
 
-BWA
+# Installation
+All the 3 steps of FEICP is integrated into a PBS script for qsub on on computing cluster and is out of the box so there's no need to install.
 
-CIRI2
-
-seqtk
-
-STAR
-
-bowtie
-
-hisat2
-
-bedtools
-pandas
