@@ -9,11 +9,19 @@ Yan Yang. Characterization of EIciRNAs reveals their distinct sequence features 
 # Requirements
 
 Pyhton3
+
 BWA
+
 CIRI2
+
 seqtk
+
 STAR
+
 bowtie
+
 hisat2
+
 bedtools
+
 pandas
