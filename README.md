@@ -14,12 +14,11 @@ Yan Yang. Characterization of EIciRNAs reveals their distinct sequence features 
 >>CIRI2<br>
 >>STAR<br>
 >>Bowtie<br>
- * STAR<br>
- * Bowtie  
- * Hisat2  
- * samtools  
- * bedtools 
- * seqtk 
+>>STAR<br>
+>>Hisat2<br> 
+>>samtools<br>
+>>bedtools<br>
+>>seqtk<br>
 
 * Packages  
  * pandas  
