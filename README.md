@@ -20,9 +20,9 @@ Yan Yang. Characterization of EIciRNAs reveals their distinct sequence features 
 >>bedtools<br>
 >>seqtk<br>
 
-* Packages  
- * pandas  
- * scipy  
+>Packages  
+>>pandas  
+>>scipy  
  
 ## RNA-seq
 The RNase R-treated paired-end RNA-seq is recommended. Total RNA-seq, poly(A)-/ribo- RNA-seq is also acceptable. According to our experience, the RNase R treatment can significantly enrich EIciRNAs, like other circRNAs.
