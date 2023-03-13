@@ -30,5 +30,8 @@ All the 3 steps of FEICP is integrated into a PBS script for qsub on on computin
 The FEICP pipeline need the reference genome file and the gene annotation file used to find and annotate the circular.
 The recommended gene annotation file are gencode, ENSEMBL or NCBI RefSeq GTF files. And the reference genome file should contain all the genome sequences.
 
+
 # Usage
-After getting the 
+After getting the reference genome and gene annotation gtf file, we can run the FEICP pipeline directly without needing to prepeare other annotation file, such as intron, exon-intron, exon-exon file, etc bacause the program itself will get them all.
+
+
