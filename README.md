@@ -111,3 +111,9 @@ optional arguments:
 | 4 | gene_id | the annotated gene name of EIciRNA |
 | 5 | EIci_junc_count | the BSJ (back-splice junction) count of EIciRNA |
 | 6 | strand | the strand of EIciRNA |
+| 7 | intron_start | the start coordinate of retained intron (0-based) |
+| 8 | intron_end | the end coordinate of retained intron (1-based) |
+| 9 | intron_cov | the reads coverage of retained intron |
+| 10 | EI | the junction count of left_exon-intron |
+| 11 | IE | the junction count of intron_right_exon |
+| 12 | EE | the junction count of left_exon-right_exon |
