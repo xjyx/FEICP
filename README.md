@@ -128,3 +128,5 @@ Considering the low expression nature of EIciRNAs, according to my experience, I
   - **IE** >= 1  
   - **EE** >= 1  
   - **intron_count** >= 1  
+You can filter the outputs according to the above condition using your favorite tools. As for me, I am used to processing this kind of task using **pandas** or **tidyverse** or just a single UNIX command:  
+cat <out_file> | awk 'BEGIN{OFS=FS="\t"}{if(NR==1 || ($9 >= 0.50 && $10*$11*$12*$12*$13)){print}}' > <out_filtered>  
