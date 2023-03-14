@@ -37,7 +37,7 @@ The recommended gene annotation file are gencode, ENSEMBL or NCBI RefSeq GTF fil
 
 # Usage
 After getting the reference genome and gene annotation gtf file, we can run the FEICP pipeline directly without needing to prepeare other annotation file, such as intron, exon-intron, exon-exon file, etc bacause the program itself will get them all.
-
+```
 FEICP.py --help  
 
 usage: Getting potential EIciRNAs form RNA-seq [-h] --fastqs FASTQS  
@@ -99,3 +99,4 @@ optional arguments:
                         The number of CPUs to use  
   --log-level {NOTSET,DEBUG,INFO,WARNING,CRITICAL,ERROR,CRITICAL}  
                         Log level  
+```
