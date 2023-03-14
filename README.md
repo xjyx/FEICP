@@ -117,3 +117,5 @@ optional arguments:
 | 10 | EI | the junction count of left_exon-intron |
 | 11 | IE | the junction count of intron_right_exon |
 | 12 | EE | the junction count of left_exon-right_exon |
+| 13 | intron_count | the count of reads located within |
+|    |              | the middle 200 bp of retained intron |
