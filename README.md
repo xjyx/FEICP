@@ -10,10 +10,10 @@ Yan Yang. Characterization of EIciRNAs reveals their distinct sequence features 
 
 ## Softwares and Packages
   - **Software** <br>
->>BWA<br>
->>CIRI2<br>
->>STAR<br>
->>Bowtie<br>
+    - BWA<br>
+    - CIRI2<br>
+    - STAR<br>
+    - Bowtie<br>
 >>STAR<br>
 >>Hisat2<br> 
 >>samtools<br>
