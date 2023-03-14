@@ -7,6 +7,7 @@ If you use FEICP in your study, please cite:
 Yan Yang. Characterization of EIciRNAs reveals their distinct sequence features and potential regulatory function in regulation of gene expression. Manuscript in preparation.
 
 # Prerequisites
+I have tested the pipeline on Red Hat 4.8.5-44 on a 64Bit machine with python 3.7. 
 
 ## Softwares and Packages
   - **Software** <br>
@@ -100,3 +101,11 @@ optional arguments:
   --log-level {NOTSET,DEBUG,INFO,WARNING,CRITICAL,ERROR,CRITICAL}  
                         Log level  
 ```
+
+### Output format ###
+| column | name | description |
+|--------|------|-------------|
+| 1 | chr | chromosome name |
+| 2 | start | the start coordinate (0-based).
+| 3 | end | the end coordinate (1-based).
+| 4 | gene_name | 
