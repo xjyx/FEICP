@@ -106,6 +106,8 @@ optional arguments:
 | column | name | description |
 |--------|------|-------------|
 | 1 | chr | chromosome name |
-| 2 | start | the start coordinate (0-based).
-| 3 | end | the end coordinate (1-based).
-| 4 | gene_name | 
+| 2 | start | the start coordinate (0-based) |
+| 3 | end | the end coordinate (1-based) |
+| 4 | gene_id | the annotated gene name of EIciRNA |
+| 5 | EIci_junc_count | the BSJ (back-splice junction) count of EIciRNA |
+| 6 | strand | the strand of EIciRNA |
