@@ -121,10 +121,10 @@ optional arguments:
 
 
 ### Hot to filter the outputs ###
-Considering the low expression nature of EIciRNAs, according to my experience, I recommend you to filter the outputs according to a relaxed but reasonable condition:
-    - **EIci_junc_count** >= 1  
-    - **intron_cov** >= 0.50  
-    - **EI** >= 1  
-    - **IE** >= 1  
-    - **EE** >= 1  
-    - **intron_count** >= 1  
+Considering the low expression nature of EIciRNAs, according to my experience, I recommend you to filter the outputs according to a relaxed but reasonable condition:  
+  - **EIci_junc_count** >= 1  
+  - **intron_cov** >= 0.50  
+  - **EI** >= 1  
+  - **IE** >= 1  
+  - **EE** >= 1  
+  - **intron_count** >= 1  
