@@ -7,7 +7,7 @@ The whole FEICP pipeline has three main parts:
   - **3. Validate the whole intron can be retained within a circular RNA**.  
 
 If you use FEICP in your study, please cite:  
-Yinchong Zhong, Yan Yang et al. Characterization of EIciRNAs reveals their distinct sequence features and potential regulatory function in regulation of gene expression. Manuscript in preparation.  
+Yinchong Zhong, Yan Yang et al. Genome-wide characterization of EIciRNAs reveals their distinct sequence features and potential function in regulation of gene expression. Manuscript in preparation.  
 
 # Prerequisites
 I have tested the pipeline on Red Hat 4.8.5-44 on a 64Bit machine with python 3.7. 
