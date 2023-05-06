@@ -55,16 +55,14 @@ In the above command,
   - **nth** is the number of samples from which you want to find EIciRNAs at a time  
   - **ncpus** is the number of cores used in FEICP for each sample, this parameter will be used manily in mapping stage  
   - **path** is the path to the fastq file  
-
-Build a text file with one sample name each row
-For example
+  - **sample_list** is the text file with one prefix of gzipped fastq files each row and the names will be used in the output of downstream analysis. For example, is there are fastq files in the path: test_1_1.fastq.gz, test_1_2.fastq.gz; test_2_1.fastq.gz, test_2_2.fastq.gz, then you should build a text file test.txt
+  
 ```
 cat sample_list.txt
 ```
 ### test_1
 ### test_2
-and the path directory must contain test_1_1.fastq.gz, test_1_2.fastq.gz; test_2_1.fastq.gz, test_2_2.fastq.gz
-Then you can 
+
 After getting the reference genome and gene annotation gtf file, we can run the FEICP pipeline directly without needing to prepeare other annotation file, such as intron, exon-intron, exon-exon file, etc bacause the program itself will get them all.
 ```
 FEICP.py --help  
