@@ -40,6 +40,30 @@ The recommended gene annotation file are gencode, ENSEMBL or NCBI RefSeq GTF fil
 
 
 # Usage
+
+## A quick start
+To get EIciRNAs from multiple paired-end RNA-seq data in multiple processes, clone this repository in local and run:
+qsub -v      src_dir="$src_dir",ref_fasta="$ref_fasta",ref_gtf="$ref_gtf",bwa_index="$bwa_index",star_index="$star_index",nth="$nth",ncpus="$ncpus",path="$path",sample_list="$sample_list" FEICP_parallel.pbs
+
+In the above command,
+src_dir is the path to the src of this pipeline
+ref_fasta is the path to the reference genome fasta file
+ref_gtf is the path to the gtf file with gene annotation
+bwa_index is the path to the bwa index of reference genome
+star_index is the path to the STAR index generated using ref_fasta and ref_gtf
+nth is the number of samples from which you want to find EIciRNAs at a time
+ncpus is the number of cores used in FEICP for each sample, this parameter will be used manily in mapping stage
+path is the path to the fastq file
+
+Build a text file with one sample name each row
+For example
+```
+cat sample_list.txt
+```
+### test_1
+### test_2
+and the path directory must contain test_1_1.fastq.gz, test_1_2.fastq.gz; test_2_1.fastq.gz, test_2_2.fastq.gz
+Then you can 
 After getting the reference genome and gene annotation gtf file, we can run the FEICP pipeline directly without needing to prepeare other annotation file, such as intron, exon-intron, exon-exon file, etc bacause the program itself will get them all.
 ```
 FEICP.py --help  
