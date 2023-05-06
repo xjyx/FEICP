@@ -47,7 +47,7 @@ To get EIciRNAs from multiple paired-end RNA-seq data in multiple processes, clo
 qsub -v src_dir="$src_dir",ref_fasta="$ref_fasta",ref_gtf="$ref_gtf",bwa_index="$bwa_index",star_index="$star_index",nth="$nth",ncpus="$ncpus",path="$path",sample_list="$sample_list" FEICP_parallel.pbs
 ```
 In the above command,  
-**src_dir** is the path to the src of this pipeline  
+  - **src_dir** is the path to the src of this pipeline  
   - **ref_fasta** is the path to the reference genome fasta file  
   - **ref_gtf** is the path to the gtf file with gene annotation  
   - **bwa_index** is the path to the bwa index of reference genome  
@@ -62,7 +62,10 @@ test_1
 test_2
 ```
 
-After getting the reference genome and gene annotation gtf file, we can run the FEICP pipeline directly without needing to prepeare other annotation file, such as intron, exon-intron, exon-exon file, etc bacause the program itself will get them all.
+## Step by step pipeline
+
+### Finding circular RNAs using CIRI2 pipeline and get circRNAs which are likely EIciRNAs using FEICP.py
+
 ```
 FEICP.py --help  
 
@@ -115,8 +118,8 @@ optional arguments:
                         mapping  
   --min-overlap MIN_OVERLAP  
                         The minimum overhang between read and reference intron  
-  --src-dir SRC_DIR, -c SRC_DIR  
-                        The directory storing source code files of CIRI2  
+  --CIRI2 CIRI2, -c CIRI2  
+                        The path to CIRI2.pl
   --output OUTPUT, -o OUTPUT  
                         The output directory  
   --sample SAMPLE, -n SAMPLE  
@@ -125,6 +128,14 @@ optional arguments:
                         The number of CPUs to use  
   --log-level {NOTSET,DEBUG,INFO,WARNING,CRITICAL,ERROR,CRITICAL}  
                         Log level  
+```
+
+I recommend using genome and gene annotation file from GENCODE:
+(such as https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_34/GRCh38.primary_assembly.genome.fa.gz and https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_34/gencode.v34.annotation.gtf.gz)
+
+With the necessary software in the environment, you can run this simply as 
+```
+FEICP.py --fastqs test_1.fastq.gz test_2.fastq.gz --paired-end --genome GRCh38.primary_assembly.genome.fa --gtf gencode.v34.annotation.gtf --CIRI2 src/CIRI2.pl --output test_FEICP --sample test
 ```
 
 ### Output format ###
