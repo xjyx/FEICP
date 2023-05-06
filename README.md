@@ -48,13 +48,13 @@ qsub -v src_dir="$src_dir",ref_fasta="$ref_fasta",ref_gtf="$ref_gtf",bwa_index="
 ```
 In the above command,  
   - **src_dir** is the path to the src of this pipeline  
-ref_fasta is the path to the reference genome fasta file  
-ref_gtf is the path to the gtf file with gene annotation  
-bwa_index is the path to the bwa index of reference genome  
-star_index is the path to the STAR index generated using ref_fasta and ref_gtf  
-nth is the number of samples from which you want to find EIciRNAs at a time  
-ncpus is the number of cores used in FEICP for each sample, this parameter will be used manily in mapping stage  
-path is the path to the fastq file  
+  - **ref_fasta** is the path to the reference genome fasta file  
+  - **ref_gtf** is the path to the gtf file with gene annotation  
+  - **bwa_index** is the path to the bwa index of reference genome  
+  - **star_index** is the path to the STAR index generated using ref_fasta and ref_gtf  
+  - **nth** is the number of samples from which you want to find EIciRNAs at a time  
+  - **ncpus** is the number of cores used in FEICP for each sample, this parameter will be used manily in mapping stage  
+  - **path** is the path to the fastq file  
 
 Build a text file with one sample name each row
 For example
