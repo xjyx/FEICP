@@ -64,7 +64,38 @@ test_2
 
 ## Step by step pipeline
 
-### Finding circular RNAs using CIRI2 pipeline and get circRNAs which are likely EIciRNAs using FEICP.py
+### 1. Prepare the necessary reference files
+
+Down load the reference genome and gene annotation gtf file from GENCODE  
+```
+wget -c https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_34/GRCh38.primary_assembly.genome.fa.gz
+wget -c https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_34/gencode.v34.annotation.gtf.gz
+gunzip GRCh38.primary_assembly.genome.fa.gz gencode.v34.annotation.gtf.gz
+```
+Make BWA index
+```
+bwa index -p hg38_bwa GRCh38.primary_assembly.genome.fa
+```
+Make STAR index according to the STAR manual (https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf)
+```
+STAR \
+        --runThreadN 6 \
+        --runMode genomeGenerate \
+        --genomeDir /path/to/star_index \
+        --genomeFastaFiles GRCh38.primary_assembly.genome.fa \
+        --sjdbGTFfile cat gencode.v34.annotation.gtf \
+        --sjdbOverhang $(mate_length - 1)
+```
+Make annotation file used in FEICP
+```
+cat gencode.v34.annotation.gtf | awk 'BEGIN{OFS=FS="\t"}{if($3=="exon"){split($9,A,"\"");print $1,$4-1,$5,A[2],A[4],$7}}' | sort -k1,1 -k2,2n >exon.bed
+cat gencode.v34.annotation.gtf | awk 'BEGIN{OFS=FS="\t"}{if($3=="transcript"){split($9,A,"\"");print $1,$4-1,$5,A[2],A[4],$7}}' | sort -k1,1 -k2,2n >transcript.bed
+cat exon.bed | sort -k1,1 -k2,2n | uniq | python make_EI.py - | sort -k1,1 -k2,2n >exon_intron.bed
+python make_intron.py --gtf cat gencode.v34.annotation.gtf --output intron.bed
+cat /path/to/star_index/chrNameLength.txt | sort -k1,1 >genome.txt
+```
+
+### 2. Finding circular RNAs using CIRI2 pipeline and get circRNAs which are likely EIciRNAs using FEICP.py
 
 ```
 FEICP.py --help  
@@ -130,30 +161,60 @@ optional arguments:
                         Log level  
 ```
 
-I recommend using genome and gene annotation file from GENCODE:
-(such as https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_34/GRCh38.primary_assembly.genome.fa.gz and https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_34/gencode.v34.annotation.gtf.gz)
 
 With the necessary software in the environment, you can run this simply as 
 ```
-FEICP.py --fastqs test_1.fastq.gz test_2.fastq.gz --paired-end --genome GRCh38.primary_assembly.genome.fa --gtf gencode.v34.annotation.gtf --CIRI2 src/CIRI2.pl --output test_FEICP --sample test
+FEICP.py \
+    --threads 8 \
+    --fastqs test_1.fastq.gz test_2.fastq.gz \
+    --paired-end \
+    --genome GRCh38.primary_assembly.genome.fa \
+    --gtf gencode.v34.annotation.gtf \
+    --CIRI2 src/CIRI2.pl \
+    --output test_FEICP \
+    --sample test
 ```
 
+### 3. Get the circRNAs harboring a whole intron
+Map RNA-seq reads against to reference genome using splice-aware aligner STAR
+```
+STAR 	\
+    --genomeLoad NoSharedMemory \
+    --runThreadN 8 \
+    --genomeDir /path/to/star_index \
+    --outFilterMultimapNmax 1 \
+    --outSAMstrandField intronMotif \
+    --outFileNamePrefix test_STAR_ \
+    --outSAMunmapped None \
+    --outSAMtype BAM SortedByCoordinate \
+    --readFilesIn test_1.fastq.gz test_2.fastq.gz \
+    --readFilesCommand gzip -dc
+```
+Compute genome coverage using deepTools
+```
+bamCoverage \
+    --bam test_STAR_Aligned.sortedByCoord.bam \
+    --outFileName test_STAR.bigWig \
+    --binSize 10 \
+    --numberOfProcessors 8 \
+    --normalizeUsing CPM
+```
 ### Output format ###
-| column | name | description |
-|--------|------|-------------|
-| 1 | chr | chromosome name |
-| 2 | start | the start coordinate (0-based) |
-| 3 | end | the end coordinate (1-based) |
-| 4 | gene_id | the annotated gene name of EIciRNA |
-| 5 | EIci_junc_count | the BSJ (back-splice junction) count of EIciRNA |
-| 6 | strand | the strand of EIciRNA |
-| 7 | intron_start | the start coordinate of retained intron (0-based) |
-| 8 | intron_end | the end coordinate of retained intron (1-based) |
-| 9 | intron_cov | the reads coverage of retained intron |
-| 10 | EI | the junction count of left_exon-intron |
-| 11 | IE | the junction count of intron_right_exon |
-| 12 | EE | the junction count of left_exon-right_exon |
-| 13 | intron_count | the count of reads located within the middle 200 bp of retained intron |
+| column | name            | description                                                            |
+| ------ | --------------- | ---------------------------------------------------------------------- |
+| 1      | chr             | chromosome name                                                        |
+| 2      | start           | the start coordinate (0-based)                                         |
+| 3      | end             | the end coordinate (1-based)                                           |
+| 4      | gene_id         | the annotated gene name of EIciRNA                                     |
+| 5      | EIci_junc_count | the BSJ (back-splice junction) count of EIciRNA                        |
+| 6      | strand          | the strand of EIciRNA                                                  |
+| 7      | intron_start    | the start coordinate of retained intron (0-based)                      |
+| 8      | intron_end      | the end coordinate of retained intron (1-based)                        |
+| 9      | intron_cov      | the reads coverage of retained intron                                  |
+| 10     | EI              | the junction count of left_exon-intron                                 |
+| 11     | IE              | the junction count of intron_right_exon                                |
+| 12     | EE              | the junction count of left_exon-right_exon                             |
+| 13     | intron_count    | the count of reads located within the middle 200 bp of retained intron |
 
 
 ### Hot to filter the outputs ###
