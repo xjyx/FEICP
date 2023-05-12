@@ -12,21 +12,20 @@ Yinchong Zhong, Yan Yang et al. Genome-wide characterization of EIciRNAs reveals
 # Prerequisites
 I have tested the pipeline on Red Hat 4.8.5-44 on a 64Bit machine with python 3.7. 
 
-## Softwares and Packages
-  - **Software** <br>
-    - BWA<br>
-    - CIRI2<br>
-    - STAR<br>
-    - Bowtie<br>
-    - STAR<br>
-    - Hisat2<br> 
-    - samtools<br>
-    - bedtools<br>
-    - seqtk<br>
-
-  - **Packages**  
-    - pandas  
-    - scipy  
+## Several softwares & packages
+| Software | Link |
+| -------- | ------------------------ |
+| Python | https://www.python.org/ |
+| BWA | https://github.com/lh3/bwa |
+| Bowtie | https://github.com/BenLangmead/bowtie |
+| HISAT2 | https://github.com/DaehwanKimLab/hisat2 |
+| STAR | https://github.com/alexdobin/STAR |
+| CIRI2 | https://sourceforge.net/projects/ciri/files/CIRI2/ |
+| Pandas | https://pandas.pydata.org/ |
+| Scipy | https://scipy.org/ |
+| samtools | https://github.com/samtools/samtools |
+| bedtools | https://github.com/arq5x/bedtools2 |
+| seqtk | https://github.com/lh3/seqtk |
  
 ## RNA-seq
 The RNase R-treated paired-end RNA-seq is recommended. Total RNA-seq, poly(A)-/ribo- RNA-seq is also acceptable. According to our experience, the RNase R treatment can significantly enrich EIciRNAs, like other circRNAs.
