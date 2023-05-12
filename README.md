@@ -12,7 +12,7 @@ Yinchong Zhong, Yan Yang et al. Genome-wide characterization of EIciRNAs reveals
 # Prerequisites
 I have tested the pipeline on Red Hat 4.8.5-44 on a 64Bit machine with python 3.7. 
 
-## Several softwares & packages
+## Softwares & packages
 | Software | Link |
 | -------- | ------------------------ |
 | Python | https://www.python.org/ |
