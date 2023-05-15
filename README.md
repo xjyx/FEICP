@@ -210,9 +210,9 @@ samtools view -@ 8 -h -q 255 test_STAR_Aligned.sortedByCoord.bam | \
     LC_COLLATE=C sort -k1,1 -k2,2n --parallel=8 -T ./ >test_STAR_Aligned.bed
 bedtools map -a exon_intron.bed -b test_STAR_Aligned.bed -f 1 -nonamecheck -g genome.txt -c 4,4 -o count_distinct,distinct | \
     awk 'BEGIN{OFS=FS="\t"}{if($7!=0){tmp=$4;$4=$5;$5=tmp;print}}' >test_EI_count.bed
-    bedtools intersect -a test_STAR_Aligned_spliced.bed -b transcript.bed -f 1 -sorted -wa -wb -nonamecheck | \
+bedtools intersect -a test_STAR_Aligned_spliced.bed -b transcript.bed -f 1 -sorted -wa -wb -nonamecheck | \
     bedtools groupby -i - -g 1,2,3,4,5,6 -c 11  -o distinct >test_spliced2tx.bed
-    python get_EE.py --read-tx test_spliced2tx.bed --output test_EE_count.bed
+python get_EE.py --read-tx test_spliced2tx.bed --output test_EE_count.bed
 python get_intron_midpoint.py intron.bed | \
     sort -k1,1 -k2,2n | uniq | \
     bedtools map -a - -b test_STAR_Aligned.bed -f 0.1 -F 0.1 -e -nonamecheck -g genome.txt -c 4,4 -o count_distinct,distinct | \
