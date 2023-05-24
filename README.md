@@ -31,7 +31,7 @@ I have tested the pipeline on Red Hat 4.8.5-44 on a 64Bit machine with python 3.
 The RNase R-treated paired-end RNA-seq is recommended. Total RNA-seq, poly(A)-/ribo- RNA-seq is also acceptable. According to our experience, the RNase R treatment can significantly enrich EIciRNAs, like other circRNAs.
 
 # Installation
-All the 3 steps of FEICP is integrated into a PBS script for qsub on on computing cluster and is out of the box so there's no need to install.
+All the 3 steps of FEICP is integrated into a PBS script for qsub on computing cluster and is out of the box so there's no need to install.
 
 # Setup
 The FEICP pipeline need the reference genome file and the gene annotation file used to find and annotate the circular RNAs.  
