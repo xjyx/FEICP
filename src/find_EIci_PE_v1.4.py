@@ -1,15 +1,5 @@
 #!/usr/bin/env python
 
-
-"""
-Being modest and good first, learning is boundless and endless.
-"""
-
-# Yang Yan
-# yangyan2015@mail.ustc.edu.cn
-# I started to write the first piece of codes on 20 December 2021 and got the stable version on 25 December 2021
-# 2021.12.25
-
 import argparse
 import gzip
 import logging
