@@ -4,9 +4,6 @@
 Usage: %prog <PIR_bed> <cov_bed> <merged_bed>
 """
 
-# Yang Yan
-# yangyan2015@mail.ustc.edu.cn
-# 2022.5.3
 
 import pandas as pd
 from sys import argv, exit
