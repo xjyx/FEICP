@@ -166,6 +166,7 @@ get_EE="$src_dir/get_EE.py"
 get_intron_midpoint="$src_dir/get_intron_midpoint.py"
 calculate_PIR="$src_dir/calculate_PIR.py"
 merge_PIR_cov="$scripts/merge_PIR_cov.py"
+get_tidy="$scripts/get_tidy_EIciRNA.py"
 CIRI2="$src_dir/CIRI2.pl"
 
 cd $path
@@ -185,6 +186,7 @@ export -f STAR_IR
 export -f sam_metrics
 export -f compute_cov
 export -f count_splice
+export -f get_tidy_EIciRNA
 
 
 cat $sample_list | xargs -I {} mkdir -p $path/{}_FEICP
