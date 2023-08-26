@@ -13,10 +13,6 @@ samtools view -h -q 255 bam_file | \
     bedtools groupby -i - -g 1,2,3,4,5,6 -c 11 -o distinct >read2tx_bed7
 """
 
-# Yang Yan
-# yangyan2015@mail.ustc.edu.cn
-# 2022.3.16
-
 import re
 import argparse
 import gzip
