@@ -201,24 +201,31 @@ bamCoverage \
 Compute the metrics of introns: Exon_left-intron, intron-Exon_right, Exon_left-Exon_right and reads coverage of intron
 ```
 cat test_EIciRNA.bed | awk 'BEGIN{OFS=FS="\t"}{if(NR>1){split($9,A,",");split($10,B,",");for(i in A){print $1,A[i],B[i],$7,$4,$6}}}' >test_EIci_intron.bed
+
 samtools view -@ 8 -h -q 255 test_STAR_Aligned.sortedByCoord.bam | \
     awk '$0 ~ /^@/ || $6 ~ /N/' | \
     samtools view -@ 8 -b | bedtools bamtobed -i - -split | \
     LC_COLLATE=C sort -k1,1 -k2,2n --parallel=8 -T ./ >test_STAR_Aligned_spliced.bed
+
 samtools view -@ 8 -h -q 255 test_STAR_Aligned.sortedByCoord.bam | \
     bedtools bamtobed -i - -split | \
     LC_COLLATE=C sort -k1,1 -k2,2n --parallel=8 -T ./ >test_STAR_Aligned.bed
 bedtools map -a exon_intron.bed -b test_STAR_Aligned.bed -f 1 -nonamecheck -g genome.txt -c 4,4 -o count_distinct,distinct | \
     awk 'BEGIN{OFS=FS="\t"}{if($7!=0){tmp=$4;$4=$5;$5=tmp;print}}' >test_EI_count.bed
+
 bedtools intersect -a test_STAR_Aligned_spliced.bed -b transcript.bed -f 1 -sorted -wa -wb -nonamecheck | \
     bedtools groupby -i - -g 1,2,3,4,5,6 -c 11  -o distinct >test_spliced2tx.bed
+
 python get_EE.py --read-tx test_spliced2tx.bed --output test_EE_count.bed
+
 python get_intron_midpoint.py intron.bed | \
     sort -k1,1 -k2,2n | uniq | \
     bedtools map -a - -b test_STAR_Aligned.bed -f 0.1 -F 0.1 -e -nonamecheck -g genome.txt -c 4,4 -o count_distinct,distinct | \
     awk '$7!=0' >test_intron_count.bed
+
 cat intron.bed | LC_COLLATE=C sort -k1,1 -k2,2n --parallel=8 -T ./ | \
     bedtools coverage -a - -b test_STAR_Aligned.bed -nonamecheck -g genome.txt -sorted | uniq >test_intron_cov.bed
+
 python calculate_PIR.py \
     --ee-count test_EE_count.bed \
     --ei-count test_EI_count.bed \
@@ -226,8 +233,9 @@ python calculate_PIR.py \
     --query-intron test_EIci_intron.bed \
     --output test_EIci_PIR.bed
     
-python merge_PIR_cov.py test_EIci_PIR.bed test_intron_cov.bed intron_EIci_intron_stats.bed
-python get_tidy_EIciRNA.py test_EIciRNA.bed intron_EIci_intron_stats.bed intron_EIciRNA_tidy.bed
+python merge_PIR_cov.py test_EIci_PIR.bed test_intron_cov.bed test_intron_EIci_intron_stats.bed
+
+python get_tidy_EIciRNA.py test_EIciRNA.bed test_intron_EIci_intron_stats.bed test_intron_EIciRNA_tidy.bed
 ```
 
 
@@ -248,8 +256,3 @@ python get_tidy_EIciRNA.py test_EIciRNA.bed intron_EIci_intron_stats.bed intron_
 | 11     | E1I              | the junction count of left_exon-intron                                |
 | 12     | IE2              | the junction count of intron-right_exon                             |
 | 13     | E1E2    | the junction count of left_exon-right_exon |
-
-You can filter the outputs according to the above condition using your favorite tools. As for me, I am used to processing this kind of task using **pandas** or **tidyverse** or just a single UNIX command:  
-```
-cat <out_file> | awk 'BEGIN{OFS=FS="\t"}{if(NR==1 || ($9 >= 0.50 && $10*$11*$12*$12*$13)){print}}' > <out_filtered>  
-```
