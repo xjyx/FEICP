@@ -88,9 +88,13 @@ STAR \
 Make annotation file used in FEICP
 ```
 cat gencode.v34.annotation.gtf | awk 'BEGIN{OFS=FS="\t"}{if($3=="exon"){split($9,A,"\"");print $1,$4-1,$5,A[2],A[4],$7}}' | sort -k1,1 -k2,2n >exon.bed
+
 cat gencode.v34.annotation.gtf | awk 'BEGIN{OFS=FS="\t"}{if($3=="transcript"){split($9,A,"\"");print $1,$4-1,$5,A[2],A[4],$7}}' | sort -k1,1 -k2,2n >transcript.bed
+
 cat exon.bed | sort -k1,1 -k2,2n | uniq | python make_EI.py - | sort -k1,1 -k2,2n >exon_intron.bed
+
 python make_intron.py --gtf cat gencode.v34.annotation.gtf --output intron.bed
+
 cat /path/to/star_index/chrNameLength.txt | sort -k1,1 >genome.txt
 ```
 
@@ -210,6 +214,7 @@ samtools view -@ 8 -h -q 255 test_STAR_Aligned.sortedByCoord.bam | \
 samtools view -@ 8 -h -q 255 test_STAR_Aligned.sortedByCoord.bam | \
     bedtools bamtobed -i - -split | \
     LC_COLLATE=C sort -k1,1 -k2,2n --parallel=8 -T ./ >test_STAR_Aligned.bed
+
 bedtools map -a exon_intron.bed -b test_STAR_Aligned.bed -f 1 -nonamecheck -g genome.txt -c 4,4 -o count_distinct,distinct | \
     awk 'BEGIN{OFS=FS="\t"}{if($7!=0){tmp=$4;$4=$5;$5=tmp;print}}' >test_EI_count.bed
 
