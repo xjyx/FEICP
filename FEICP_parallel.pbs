@@ -189,7 +189,6 @@ export -f STAR_IR
 export -f sam_metrics
 export -f compute_cov
 export -f count_splice
-export -f get_tidy_EIciRNA
 
 
 cat $sample_list | xargs -I {} mkdir -p $path/{}_FEICP
