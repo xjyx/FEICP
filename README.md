@@ -227,6 +227,7 @@ python calculate_PIR.py \
     --output test_EIci_PIR.bed
     
 python merge_PIR_cov.py test_EIci_PIR.bed test_intron_cov.bed intron_EIci_intron_stats.bed
+python get_tidy_EIciRNA.py test_EIciRNA.bed intron_EIci_intron_stats.bed intron_EIciRNA_tidy.bed
 ```
 
 
@@ -235,28 +236,18 @@ python merge_PIR_cov.py test_EIci_PIR.bed test_intron_cov.bed intron_EIci_intron
 | column | name            | description                                                            |
 | ------ | --------------- | ---------------------------------------------------------------------- |
 | 1      | chr             | chromosome name                                                        |
-| 2      | start           | the start coordinate (0-based)                                         |
-| 3      | end             | the end coordinate (1-based)                                           |
+| 2      | circ_start           | the start coordinate (0-based)                                         |
+| 3      | circ_end             | the end coordinate (1-based)                                           |
 | 4      | gene_id         | the annotated gene name of EIciRNA                                     |
 | 5      | EIci_junc_count | the BSJ (back-splice junction) count of EIciRNA                        |
 | 6      | strand          | the strand of EIciRNA                                                  |
 | 7      | intron_start    | the start coordinate of retained intron (0-based)                      |
 | 8      | intron_end      | the end coordinate of retained intron (1-based)                        |
-| 9      | intron_cov      | the reads coverage of retained intron                                  |
-| 10     | EI              | the junction count of left_exon-intron                                 |
-| 11     | IE              | the junction count of intron_right_exon                                |
-| 12     | EE              | the junction count of left_exon-right_exon                             |
-| 13     | intron_count    | the count of reads located within the middle 200 bp of retained intron |
-
-
-### Hot to filter the outputs ###
-Considering the low expression nature of EIciRNAs, according to my experience, I recommend you to filter the outputs according to a relaxed but reasonable condition:  
-  - **EIci_junc_count** >= 1  
-  - **intron_cov** >= 0.50  
-  - **EI** >= 1  
-  - **IE** >= 1  
-  - **EE** >= 1  
-  - **intron_count** >= 1  
+| 9      | coverage      | the reads coverage of retained intron                                  |
+| 10     | intron              | the count of reads located within the middle 200 bp of retained intron                                 |
+| 11     | E1I              | the junction count of left_exon-intron                                |
+| 12     | IE2              | the junction count of intron-right_exon                             |
+| 13     | E1E2    | the junction count of left_exon-right_exon |
 
 You can filter the outputs according to the above condition using your favorite tools. As for me, I am used to processing this kind of task using **pandas** or **tidyverse** or just a single UNIX command:  
 ```
