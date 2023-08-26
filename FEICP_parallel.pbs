@@ -113,6 +113,7 @@ function count_splice(){
     PIR_bed="$splice_out_dir/${sample}_intron_bed_PIR.bed" # The PIR of introns
     cov_bed="$splice_out_dir/${sample}_intron_coverage.bed" # The coverage of introns
     merge_bed="$splice_out_dir/${sample}_intron_stats.bed" # All the statistics of junction for introns
+    EIciRNA_tidy_out="$splice_out_dir/${sample}_EIciRNA_tidy.bed" # The tidy EIciRNAs 
     
     cat $EIci_bed | awk 'BEGIN{OFS=FS="\t"}{if(NR>1){split($9,A,",");split($10,B,",");for(i in A){print $1,A[i],B[i],$7,$4,$6}}}' >$intron_bed
     
@@ -145,6 +146,8 @@ function count_splice(){
     --output $PIR_bed
     
     python $merge_PIR_cov $PIR_bed $cov_bed $merge_bed
+
+    python $get_tidy $EIci_bed $merge_bed $EIciRNA_tidy_out
 }
 
 # Generate all necessary annotation files: transcript; exon; exon-intron junction; intron
