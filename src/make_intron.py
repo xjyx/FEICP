@@ -4,10 +4,6 @@
 """
 
 
-# Yang Yan
-# yangyan2015@mail.ustc.edu.cn
-# 2021.6.11
-
 from collections import defaultdict
 import re
 import gzip
