@@ -152,10 +152,10 @@ function count_splice(){
 
 # Generate all necessary annotation files: transcript; exon; exon-intron junction; intron
 function prepare_ref(){
-    cat $gtf | awk 'BEGIN{OFS=FS="\t"}{if($3=="exon"){split($9,A,"\"");print $1,$4-1,$5,A[2],A[4],$7}}' >$exon_ref
-    cat $gtf | awk 'BEGIN{OFS=FS="\t"}{if($3=="transcript"){split($9,A,"\"");print $1,$4-1,$5,A[2],A[4],$7}}' >$tx_ref
+    cat $ref_gtf | awk 'BEGIN{OFS=FS="\t"}{if($3=="exon"){split($9,A,"\"");print $1,$4-1,$5,A[2],A[4],$7}}' >$exon_ref
+    cat $ref_gtf | awk 'BEGIN{OFS=FS="\t"}{if($3=="transcript"){split($9,A,"\"");print $1,$4-1,$5,A[2],A[4],$7}}' >$tx_ref
     cat $exon_ref | sort -k1,1 -k2,2n | uniq | python $make_EI >$exon_intron_ref
-    python $make_intron --gtf $gtf --output $intron_ref
+    python $make_intron --gtf $ref_gtf --output $intron_ref
     cat $star_index/chrNameLength.txt | sort -k1,1 >$genome
 }
 
