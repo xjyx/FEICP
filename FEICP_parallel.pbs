@@ -22,7 +22,7 @@ function find_EIci(){
     --genome $ref_fasta \
     --gtf $ref_gtf \
     --bwa-index $bwa_index \
-    --CIRI2 $CIRI2 \
+    --src-dir $src_dir \
     --output $EIci_out_dir \
     --sample $sample \
     --threads $ncpus
@@ -154,7 +154,7 @@ function count_splice(){
 function prepare_ref(){
     cat $ref_gtf | awk 'BEGIN{OFS=FS="\t"}{if($3=="exon"){split($9,A,"\"");print $1,$4-1,$5,A[2],A[4],$7}}' >$exon_ref
     cat $ref_gtf | awk 'BEGIN{OFS=FS="\t"}{if($3=="transcript"){split($9,A,"\"");print $1,$4-1,$5,A[2],A[4],$7}}' >$tx_ref
-    cat $exon_ref | sort -k1,1 -k2,2n | uniq | python $make_EI >$exon_intron_ref
+    cat $exon_ref | sort -k1,1 -k2,2n | uniq | python $make_EI - >$exon_intron_ref
     python $make_intron --gtf $ref_gtf --output $intron_ref
     cat $star_index/chrNameLength.txt | sort -k1,1 >$genome
 }
@@ -162,7 +162,7 @@ function prepare_ref(){
 
 # The directory storing all source code
 src_dir="/home/shange/yangyan2015/Galadriel/scripts"
-find_EIci_py="$src_dir/find_EIci_PE_v1.4.py"
+find_EIci_py="$src_dir/FEICP.py"
 make_intron="$src_dir/make_intron.py"
 make_EI="$src_dir/make_EI.py"
 get_EE="$src_dir/get_EE.py"
