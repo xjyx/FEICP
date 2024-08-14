@@ -7,7 +7,7 @@ The whole FEICP pipeline has three main parts:
   - **3. Validate the whole intron can be retained within a circular RNA**.  
 
 If you use FEICP in your study, please cite:  
-Yinchun Zhong, Yan Yang et al. Systematic identification and characterization of Exon-intron circRNAs.  
+**Zhong Y, Yang Y, Wang X, Ren B, Wang X, Shan G, Chen L. Systematic identification and characterization of exon-intron circRNAs. Genome Res. 2024 Apr 25;34(3):376-393. doi: 10.1101/gr.278590.123.**
 
 # Prerequisites
 I have tested the pipeline on Red Hat 4.8.5-44 on a 64Bit machine with python 3.7. 
