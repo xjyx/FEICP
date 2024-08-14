@@ -46,7 +46,7 @@ To get EIciRNAs from multiple paired-end RNA-seq data in multiple processes, clo
 qsub -v src_dir="$src_dir",ref_fasta="$ref_fasta",ref_gtf="$ref_gtf",bwa_index="$bwa_index",star_index="$star_index",nth="$nth",ncpus="$ncpus",path="$path",sample_list="$sample_list" FEICP_parallel.pbs
 ```
 In the above command,  
-  - **src_dir** is the path to the src of this pipeline  
+  - **src_dir** is the path to the src of this pipeline. Please also make sure that CIRI2.pl is included under this directory  
   - **ref_fasta** is the path to the reference genome fasta file  
   - **ref_gtf** is the path to the gtf file with gene annotation  
   - **bwa_index** is the path to the bwa index of reference genome  
