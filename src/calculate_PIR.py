@@ -6,7 +6,7 @@
 import argparse
 from collections import defaultdict
 import re
-from bio import open_file
+from FEICP import open_file
 from scipy.stats import binomtest
 import numpy as np
 import sys
