@@ -24,6 +24,7 @@ I have tested the pipeline on Red Hat 4.8.5-44 on a 64Bit machine with python 3.
 | Pandas | https://pandas.pydata.org/ |
 | Scipy | https://scipy.org/ |
 | samtools | https://github.com/samtools/samtools |
+| sambamba | https://github.com/biod/sambamba/releases |
 | bedtools | https://github.com/arq5x/bedtools2 |
 | seqtk | https://github.com/lh3/seqtk |
  
