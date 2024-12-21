@@ -5,7 +5,7 @@
 
 import re
 import sys
-from bio import open_file
+from FEICP import open_file
 
 try:
     bed_file = sys.argv[1]
