@@ -59,9 +59,9 @@ function sam_metrics(){
     sam_bwa="$EIci_out_dir/${sample}_bwa.sam"
     bam_bwa="$metrics_out_dir/${sample}_bwa.bam"
     bam_metrics="$metrics_out_dir/${sample}_bwa_flagstat.txt"
-    sambamba-0.8.1-linux-amd64-static view -S -f bam -t $ncpus $sam_bwa | \
-    sambamba-0.8.1-linux-amd64-static sort -t $ncpus -m 10G -o $bam_bwa -t $ncpus /dev/stdin
-    sambamba-0.8.1-linux-amd64-static flagstat -t $ncpus $bam_bwa >$bam_metrics
+    sambamba view -S -f bam -t $ncpus $sam_bwa | \
+    sambamba sort -t $ncpus -m 10G -o $bam_bwa -t $ncpus /dev/stdin
+    sambamba flagstat -t $ncpus $bam_bwa >$bam_metrics
 }
 
 function compute_cov(){
@@ -74,8 +74,8 @@ function compute_cov(){
     bwa_cov_file="$cov_out_dir/${sample}_bwa.bw"
     star_bam_file="$STAR_out_dir/${sample}_Aligned.sortedByCoord.out.bam"
     star_cov_file="$cov_out_dir/${sample}_STAR.bw"
-    sambamba-0.8.1-linux-amd64-static index -t $ncpus $bwa_bam_file
-    sambamba-0.8.1-linux-amd64-static index -t $ncpus $star_bam_file
+    sambamba index -t $ncpus $bwa_bam_file
+    sambamba index -t $ncpus $star_bam_file
     bamCoverage \
     --bam $bwa_bam_file \
     --outFileName $bwa_cov_file \
